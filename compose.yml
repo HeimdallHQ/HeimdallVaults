@@ -24,7 +24,14 @@ services:
     volumes:
       - ./:/workspace
       - pnpm-store:/root/.local/share/pnpm/store
-    command: bash -lc "corepack enable && pnpm install --no-frozen-lockfile && pnpm --filter web dev"
+    command: >
+      bash -lc "
+        corepack enable &&
+        corepack prepare pnpm@10.18.3 --activate &&
+        pnpm install --no-frozen-lockfile &&
+        pnpm approve-builds sharp unrs-resolver || true &&
+        pnpm --filter web dev
+      "
     depends_on:
       - api
 

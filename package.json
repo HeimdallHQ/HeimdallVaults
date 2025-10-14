@@ -11,5 +11,9 @@
   "license": "ISC",
   "devDependencies": {
     "turbo": "^2.5.8"
+  },
+  "packageManager": "pnpm@10.18.3",
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "unrs-resolver"]
   }
 }
