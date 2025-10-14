@@ -1,0 +1,4 @@
+# Nix / direnv artifacts
+.direnv/
+result
+*.drv
