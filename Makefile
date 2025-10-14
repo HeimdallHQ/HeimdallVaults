@@ -5,7 +5,7 @@
 TILT ?= tilt
 TILTFILE := dev/Tiltfile
 
-.PHONY: up down logs restart clean trigger-api trigger-web
+.PHONY: up down logs restart clean trigger-api trigger-web mobile mobile-ios mobile-android
 
 ## Start the full dev environment
 up:
@@ -37,3 +37,12 @@ clean:
 	@echo "🧹 Cleaning up Docker images/volumes"
 	docker compose down --volumes --remove-orphans || true
 	docker system prune -f
+
+mobile:
+	pnpm --filter mobile start
+
+mobile-ios:
+	pnpm --filter mobile ios
+	
+mobile-android:
+	pnpm --filter mobile android
