@@ -1,4 +1,31 @@
-# Nix / direnv artifacts
+# ─── Environment / Nix ───────────────────────────────
 .direnv/
 result
 *.drv
+*.log
+
+# ─── Node / pnpm / Turborepo ─────────────────────────
+node_modules/
+.pnpm-store/
+.next/
+dist/
+.cache/
+turbo/
+.vscode/
+.DS_Store
+
+# ─── .NET / C# ───────────────────────────────────────
+bin/
+obj/
+*.user
+*.suo
+*.swp
+*.tmp
+
+# ─── Expo / React Native ─────────────────────────────
+.expo/
+android/
+ios/
+
+# ─── OS / Misc ───────────────────────────────────────
+Thumbs.db
