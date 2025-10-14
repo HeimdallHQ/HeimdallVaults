@@ -12,8 +12,18 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "ios": { "supportsTablet": true },
-    "android": { "adaptiveIcon": { "foregroundImage": "./assets/adaptive-icon.png", "backgroundColor": "#ffffff" } },
-    "web": { "bundler": "metro" }
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.heimdallvaults"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    }
   }
 }
