@@ -29,3 +29,6 @@ ios/
 
 # ─── OS / Misc ───────────────────────────────────────
 Thumbs.db
+
+# Tilt / Compose
+tilt_modules/

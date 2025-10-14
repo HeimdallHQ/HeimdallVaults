@@ -15,6 +15,4 @@ app.UseCors();
 app.MapGet("/hello", () => Results.Json(new { message = "Hello World" }));
 app.MapGet("/", () => "API up");
 
-app.Urls.Clear();
-app.Urls.Add("http://localhost:5050");
 app.Run();

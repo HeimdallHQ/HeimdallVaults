@@ -1,0 +1,2 @@
+# Use Docker Compose to bring up dev services
+docker_compose('../compose.yml')

@@ -1,0 +1,32 @@
+services:
+  api:
+    build:
+      context: .                      # repo root
+      dockerfile: apps/api/Dockerfile.dev
+    ports:
+      - "5050:5050"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    volumes:
+      - ./apps/api:/app               # mount source for dotnet watch
+      - /app/bin
+      - /app/obj
+
+  web:
+    image: node:20
+    working_dir: /workspace
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:5050
+      HOSTNAME: 0.0.0.0
+      CI: "true"
+    volumes:
+      - ./:/workspace
+      - pnpm-store:/root/.local/share/pnpm/store
+    command: bash -lc "corepack enable && pnpm install --no-frozen-lockfile && pnpm --filter web dev"
+    depends_on:
+      - api
+
+volumes:
+  pnpm-store:

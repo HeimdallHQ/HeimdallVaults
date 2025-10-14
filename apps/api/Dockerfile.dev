@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0
+
+WORKDIR /app
+EXPOSE 5050
+
+# Prime the NuGet cache (cheap layer)
+COPY apps/api/*.csproj ./
+RUN dotnet restore
+
+# At runtime we mount the source, so no COPY here.
+# `dotnet watch` serves on 0.0.0.0 so Compose can publish it.
+CMD ["dotnet", "watch", "run", "--project", "/app", "--urls", "http://0.0.0.0:5050"]
