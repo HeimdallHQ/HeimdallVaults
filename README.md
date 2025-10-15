@@ -125,14 +125,14 @@ All development commands are wrapped by the `Makefile` for convenience.
 
 | Command | Description |
 |----------|-------------|
-| `make up` | 🚀 Start full dev environment (Tilt + Docker Compose + live reload) |
+| `make up` | 🚀 Start full dev environment (Tilt + Docker Compose + Expo mobile) |
 | `make down` | 🛑 Stop all Tilt resources |
 | `make logs` | 📜 Stream logs from running containers |
 | `make restart` | 🔁 Restart all Tilt resources |
 | `make trigger-api` | ♻️ Rebuild only the backend service |
 | `make trigger-web` | ♻️ Rebuild only the web frontend |
 | `make clean` | 🧹 Clean up Docker images, volumes, and orphans |
-| `make mobile` | 📱 Start the Expo mobile app |
+| `make mobile` | 📱 Manually restart the Expo mobile app (already launched by `make up`) |
 | `make mobile-ios` | 🍎 Launch iOS simulator |
 | `make mobile-android` | 🤖 Launch Android emulator |
 
@@ -142,7 +142,13 @@ All development commands are wrapped by the `Makefile` for convenience.
 
 ## 📱 Running the Mobile App (Expo)
 
-The mobile app can run in three ways:
+`make up` also launches the Expo development server automatically via Tilt. Once Tilt finishes starting the stack you'll see the Expo QR code and Metro logs in the Tilt UI or in the terminal by pressing `s` to tail the logs. Scan the QR code with the **Expo Go** app from your phone, or potentially with your camera app - while you have the Expo Go app installed.
+
+### Note
+
+Unfortunately the Tilt UI logs distort the QR code so that it can not be scanned. To get around this, simply press `s` to tail the logs in the terminal, after your `make up` command. Then you will get a non distorted QR code in your terminal output. This QR should only be needed the first time you link your Expo Go app with your development server.
+
+The mobile app can run separately, in three ways:
 
 ### Option 1 — iOS Simulator
 ```bash
@@ -155,6 +161,7 @@ make mobile-android
 ```
 
 ### Option 3 — Physical Device (Expo Go)
+Use this if you need to relaunch the server or reprint the QR code manually:
 ```bash
 make mobile
 ```
@@ -180,10 +187,9 @@ The app automatically connects to your local backend using an environment variab
 
 Typical workflow:
 
-1. `make up` → Start backend and web in Tilt  
-2. Develop — live reload is automatic  
-3. `make mobile` → Run Expo mobile app  
-4. `make down` → Stop when finished  
+1. `make up` → Start backend, web, and mobile (Expo) via Tilt
+2. Develop — live reload is automatic across all apps
+3. `make down` → Stop when finished
 
 Everything runs inside a reproducible Nix environment — no global tooling required.
 
