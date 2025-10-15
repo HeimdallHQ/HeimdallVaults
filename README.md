@@ -21,7 +21,7 @@ Nix provides a fully reproducible development environment.
 **Install Nix (macOS/Linux):**
 
 ```bash
-sh <(curl -L https://nixos.org/nix/install)
+sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
 ```
 
 ➡️ **Official docs:**  
