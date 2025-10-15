@@ -1,2 +1,10 @@
 # Use Docker Compose to bring up dev services
 docker_compose('../compose.yml')
+
+local_resource(
+    'mobile',
+    cmd='echo "Starting Expo development server via Tilt"',
+    serve_cmd='python3 -c "import pty, os; pty.spawn([\\"pnpm\\", \\"--filter\\", \\"mobile\\", \\"start\\"])"',
+    dir='..',
+    resource_deps=['api'],
+)
