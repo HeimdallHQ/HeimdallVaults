@@ -1,20 +1,45 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useMemo, useState } from "react";
+import { apiBase, buildApiUrl } from "../lib/api";
 
 export default function Home() {
-  const [msg, setMsg] = useState("loading...");
+  const [message, setMessage] = useState("loading...");
+  const [error, setError] = useState<string | null>(null);
+
+  const helloEndpoint = useMemo(() => buildApiUrl("/hello"), []);
+  const baseForDisplay = apiBase || "(relative to web host)";
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/hello`)
-      .then(r => r.json())
-      .then(d => setMsg(d.message))
-      .catch(() => setMsg("error"));
-  }, []);
+    setError(null);
+    setMessage("loading...");
+
+    fetch(helloEndpoint)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setMessage(data.message ?? "ok");
+      })
+      .catch((err: Error) => {
+        setError(err.message);
+        setMessage("error");
+      });
+  }, [helloEndpoint]);
 
   return (
-    <main style={{ padding: 32, fontFamily: "system-ui" }}>
-      <h1>Hello from Web</h1>
-      <p>Backend says: <b>{msg}</b></p>
-    </main>
+    <section style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+      <h1>Heimdall Vaults dashboard</h1>
+      <p>
+        Backend says: <strong>{message}</strong>
+      </p>
+      <p style={{ fontSize: "0.9rem", color: "#666" }}>API base: {baseForDisplay}</p>
+      {error ? (
+        <p style={{ color: "#c00" }}>Failed to reach the backend: {error}</p>
+      ) : null}
+    </section>
   );
 }
