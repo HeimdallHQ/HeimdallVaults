@@ -45,7 +45,7 @@ brew install direnv
 
 **Install Direnv (Linux):**
 ```bash
-sudo apt install direnv
+curl -sfL https://direnv.net/install.sh | bash
 ```
 
 ➡️ **Official docs:**  
