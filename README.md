@@ -136,6 +136,8 @@ All development commands are wrapped by the `Makefile` for convenience.
 | `make mobile-ios` | 🍎 Launch iOS simulator |
 | `make mobile-android` | 🤖 Launch Android emulator |
 
+> ℹ️ `make up` also provisions a Bitcoin Core node running in **regtest** mode. The backend connects to it at `http://bitcoin:18443` using the credentials `heimdall` / `heimdall`. You can reach the node from your host at `http://localhost:18443`.
+
 ---
 
 ## 📱 Running the Mobile App (Expo)
